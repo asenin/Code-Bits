@@ -3,16 +3,18 @@
 estimate_coeff <- function(x, y){
   n = length(x)
   
+  #Determination des moyennes des x et y du dataset
   m_x = mean(x)
   m_y = mean(y)
   
-  #cross derivation about x
-  SS_xy = sum(y*x) - n*m_y*m_x
-  SS_xx = sum(x*x) - n*m_x*m_x
+  SC_xy = sum(y*x) - n*m_y*m_x #sommes des carées de xy i.e covariance
+  SC_xx = sum(x*x) - n*m_x*m_x #somme des carées de xx i.e variance
   
-  #regression coefficients
-  b_1 = SS_xy / SS_xx
-  b_0 = m_y - b_1*m_x
+  
+  
+  #estimation des moindres carées
+  b_1 = cov(x, y) / var(x) #ordonée a l'origine
+  b_0 = m_y - b_1*m_x #pente de la droite
   
   b <- c(b_0, b_1)
   
